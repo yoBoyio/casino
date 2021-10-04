@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
+import History from '../views/History.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Draw from '../views/Draw.vue'
@@ -17,9 +17,9 @@ const routes = [
     meta: { requiresLogin: false }
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About,
+    path: '/history',
+    name: 'History',
+    component: History,
     meta: { requiresLogin: true }
 
   },

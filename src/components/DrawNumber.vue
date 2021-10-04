@@ -5,13 +5,13 @@
         class="w-14 h-14 text-2xl text-center border-2 border-black"
         name="luckyNums"
         id="luckyNums"
+        @change="numberCheck($event)"
       >
         <option
-          @blur="numberCheck"
           class="text-2xl"
           v-for="number in numbers"
           :key="number"
-          value="number"
+          :value="number"
         >
           {{ number }}
         </option>
@@ -31,9 +31,9 @@ export default {
     };
   },
   methods: {
-    numberCheck() {
-      this.$emit("number-check", {
-        value: this.$refs.input.value,
+    numberCheck(event) {
+      this.$emit("myEvent", {
+        value: event.target.value,
         id: this.id,
       });
     },
@@ -41,5 +41,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

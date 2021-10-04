@@ -13,6 +13,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons'
+import './assets/tailwind.css'
 
 library.add(faGithub, faGoogle, faHandHoldingUsd)
 

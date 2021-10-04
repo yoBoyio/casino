@@ -19,7 +19,8 @@
           <ul class="flex flex-wrap list-none md:justify-end justify-center">
             <li>
               <a
-                href=""
+                href="https://github.com/yoBoyio/casino-live-bet"
+                target="_blank"
                 class="
                   text-white
                   hover:text-gray-400
