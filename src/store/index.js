@@ -54,7 +54,6 @@ export default new Vuex.Store({
       const auth = getAuth();
       signInWithEmailAndPassword(auth, payload.email, payload.password)
         .then((response) => {
-          console.log(response);
           commit("setUser", response.user);
         })
         .catch((error) => {

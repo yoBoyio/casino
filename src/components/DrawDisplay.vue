@@ -65,8 +65,6 @@ export default {
       const value = parseInt(number.value);
       const id = number.id;
       const isUnique = this.numberArray.some((num) => num.value === value);
-      console.log(isUnique);
-      console.log(value);
       const numExists = this.numberExists(id);
       if (!isUnique) {
         if (numExists) {

@@ -8,7 +8,7 @@ const getters = {
   },
   getSpecificNumber: (state) => (number) => {
     return state.numbers.filter((item) => {
-      return item === number;
+      return item.value === number;
     });
   },
 };

@@ -1,74 +1,68 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import History from '../views/History.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
-import Draw from '../views/Draw.vue'
-import store from '../store/index'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import History from "../views/History.vue";
+import Login from "../views/Login.vue";
+import Register from "../views/Register.vue";
+import Draw from "../views/Draw.vue";
+import store from "../store/index";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
-    meta: { requiresLogin: false }
+    meta: { requiresLogin: false },
   },
   {
-    path: '/history',
-    name: 'History',
+    path: "/history",
+    name: "History",
     component: History,
-    meta: { requiresLogin: true }
-
+    meta: { requiresLogin: true },
   },
   {
-    path: '/draw',
-    name: 'Draw',
+    path: "/draw",
+    name: "Draw",
     component: Draw,
-    meta: { requiresLogin: true }
-
+    meta: { requiresLogin: true },
   },
   {
-    path: '/login',
-    name: 'Login',
+    path: "/login",
+    name: "Login",
     component: Login,
-    meta: { requiresLogin: false }
+    meta: { requiresLogin: false },
   },
   {
-    path: '/register',
-    name: 'Register',
+    path: "/register",
+    name: "Register",
     component: Register,
-    meta: { requiresLogin: false }
-
-  }
-]
+    meta: { requiresLogin: false },
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
 router.beforeEach((to, from, next) => {
-
   if (to.meta.requiresLogin) {
-    // console.log(store.state.user)
     if (!store.state.isAuthenticated) {
-      next({ name: 'Login' });
+      next({ name: "Login" });
     } else {
       next();
     }
   } else if (store.state.isAuthenticated) {
-    if (to.name == 'Login' || to.name == 'Register') {
-      next({ name: 'Home' });
+    if (to.name == "Login" || to.name == "Register") {
+      next({ name: "Home" });
     } else {
       next();
     }
-  }
-  else {
+  } else {
     next();
   }
 });
-export default router
+export default router;
