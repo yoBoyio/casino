@@ -60,16 +60,13 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import DrawResults from "../components/DrawResults.vue";
-// import { doc, setDoc, collection, Timestamp } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 
 import {
   getFirestore,
   collection,
-  setDoc,
-  doc,
+  addDoc,
   Timestamp,
-} from "firebase/firestore/lite";
+} from "firebase/firestore";
 
 export default {
   name: "Draw",
@@ -97,6 +94,7 @@ export default {
     async getRandomNumbers(timer) {
       for (var i = 0; i < 5; i++) {
         await timer(4000);
+        console.log("loop");
         var randomNumber = this.generateRandom();
         this.randomNumbers.push(randomNumber);
         const li = document.getElementById("luckyNum").querySelectorAll("li")[
@@ -130,38 +128,24 @@ export default {
       }
       return false;
     },
-    saveGame(price) {
-      const auth = getAuth();
-      console.log("done");
-
+    async saveGame(price) {
+      const db = getFirestore();
       var user = this.getUser.email;
-
-      const db = getFirestore(auth);
-      const history = doc(collection(db, "history"));
-
-      setDoc(history, {
-        amount: price,
-        draws: this.randomNumbers,
-        status: price > 0 ? true : false,
-        user: user,
-        date: Timestamp.fromDate(new Date()),
-        playedNumbers: this.getNumbers,
-        winningNumbers: this.winningNumbers,
-      });
-      // firebase
-      //   .firestore()
-      //   .collection("history")
-      //   .add({
-      //     amount: price,
-      //     draws: this.randomNumbers,
-      //     status: price > 0 ? true : false,
-      //     user: user,
-      //     date: firebase.firestore.Timestamp.fromDate(new Date()),
-      //     playedNumbers: this.getNumbers,
-      //     winningNumbers: this.winningNumbers,
-      //   })
-      //   .then(alert("Game was saved to history."), this.$router.push("/"))
-      //   .catch((error) => console.log(error));
+      try {
+        const docRef = await addDoc(collection(db, "history"), {
+          amount: price,
+          draws: this.randomNumbers,
+          status: price > 0 ? true : false,
+          user: user,
+          date: Timestamp.fromDate(new Date()),
+          playedNumbers: this.getNumbers,
+          winningNumbers: this.winningNumbers,
+        });
+        alert(`Game ${docRef.id} was saved to history.`),
+          this.$router.push("/");
+      } catch (e) {
+        console.error("Error adding document: ", e);
+      }
     },
   },
   computed: {

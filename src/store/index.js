@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import router from "../router";
-import Numbers from "./modules/luckyNumbers";
+import luckyNumbers from "./modules/luckyNumbers";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -71,7 +71,7 @@ export default new Vuex.Store({
     },
   },
   modules: {
-    Numbers,
+    luckyNumbers,
   },
   getters: {
     getUser(state) {
