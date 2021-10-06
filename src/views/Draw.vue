@@ -94,7 +94,6 @@ export default {
     async getRandomNumbers(timer) {
       for (var i = 0; i < 5; i++) {
         await timer(4000);
-        console.log("loop");
         var randomNumber = this.generateRandom();
         this.randomNumbers.push(randomNumber);
         const li = document.getElementById("luckyNum").querySelectorAll("li")[
